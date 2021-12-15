@@ -25,7 +25,11 @@ const App = (props) => {
       });
   }, []);
 
+  // modify deletion and complete deleteMovie filter
+  // + convert id to a number
+  // pass into Movie below as props deleteMovie={deleteMovie}
   const deleteMovie = (id)=> {
+    setMovies(movies.filter(item => (item.id !== Number(id))));
   }
 
   const addToFavorites = (movie) => {
@@ -45,11 +49,11 @@ const App = (props) => {
         
           <Switch>
             <Route path="/movies/edit/:id">
-              <EditMovieForm />
+              <EditMovieForm setMovies={setMovies}/>
             </Route>
 
             <Route path="/movies/:id">
-              <Movie/>
+              <Movie deleteMovie={deleteMovie}/>
             </Route>
 
             <Route path="/movies">
